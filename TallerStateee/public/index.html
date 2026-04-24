@@ -33,25 +33,57 @@
         <article class="card context-card">
             <h2>Contexto</h2>
             <p>
-                Una cuenta bancaria no siempre permite las mismas operaciones.
-                Su comportamiento depende de si está activa, bloqueada, sobregirada o cerrada.
+                Una cuenta bancaria puede comportarse de forma diferente dependiendo de si está activa,
+                bloqueada, sobregirada o cerrada.
             </p>
         </article>
 
         <article class="card context-card">
             <h2>Problema</h2>
             <p>
-                Controlar muchas reglas con condicionales puede volver el sistema difícil de mantener.
+                Manejar muchas reglas con condicionales vuelve el código más difícil de mantener
+                y de ampliar.
             </p>
         </article>
 
         <article class="card context-card">
             <h2>Solución</h2>
             <p>
-                Separar el comportamiento de cada estado permite tener un sistema más claro,
-                flexible y fácil de ampliar.
+                Separar el comportamiento por estado permite que el sistema sea más claro,
+                flexible y ordenado.
             </p>
         </article>
+    </section>
+
+    <section class="card diagram-card">
+        <div class="section-title">
+            <h2>Flujo de estados</h2>
+            <p>Comportamiento general de la cuenta durante la simulación.</p>
+        </div>
+
+        <div class="diagram-box">
+            <div class="diagram-row">
+                <span class="state-node active-node">Activa</span>
+                <span class="state-arrow">→</span>
+                <span class="state-node warning-node">Sobregirada</span>
+                <span class="state-arrow">→</span>
+                <span class="state-node active-node">Activa</span>
+            </div>
+
+            <div class="diagram-row">
+                <span class="state-node active-node">Activa</span>
+                <span class="state-arrow">→</span>
+                <span class="state-node frozen-node">Bloqueada</span>
+                <span class="state-arrow">→</span>
+                <span class="state-node neutral-node">Activa / Sobregirada</span>
+            </div>
+
+            <div class="diagram-row">
+                <span class="state-node neutral-node">Activa / Bloqueada</span>
+                <span class="state-arrow">→</span>
+                <span class="state-node closed-node">Cerrada</span>
+            </div>
+        </div>
     </section>
 
     <section id="simulationSection" class="simulation hidden">
@@ -118,7 +150,7 @@
                     <input id="overdraftLimit" type="number" min="0" placeholder="Ej: 200000">
                 </label>
 
-                <button class="primary" onclick="createAccount()">Crear cuenta</button>
+                <button class="primary full-button" onclick="createAccount()">Crear cuenta</button>
             </section>
 
             <section class="card">
