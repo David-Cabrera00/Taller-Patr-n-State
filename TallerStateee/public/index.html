@@ -8,117 +8,163 @@
 <body>
 <div class="app">
 
-    <header class="hero">
-        <div>
+    <section class="landing">
+        <div class="landing-content">
             <p class="badge">Banco digital</p>
-            <h1>Gestión de Cuentas</h1>
-            <p>
-                Administre operaciones bancarias de forma rápida y segura.
+            <h1>Gestión Inteligente de Cuentas</h1>
+            <p class="landing-text">
+                Sistema web local para administrar operaciones bancarias según el estado actual de una cuenta.
             </p>
+
+            <div class="landing-actions">
+                <button class="primary" onclick="startSimulation()">Iniciar simulación</button>
+                <button onclick="scrollToContext()">Ver contexto</button>
+            </div>
         </div>
 
-        <div class="state-panel">
-            <span>Estado</span>
-            <strong id="stateName">Sin cuenta</strong>
-            <small id="stateDescription">Cree una cuenta para iniciar.</small>
+        <div class="landing-card">
+            <span>Estado inicial</span>
+            <strong>Sin cuenta</strong>
+            <small>La simulación comienza al crear una cuenta bancaria.</small>
         </div>
-    </header>
+    </section>
 
-    <section class="dashboard">
-        <article class="metric-card">
-            <span>Cuenta</span>
-            <strong id="accountNumber">-</strong>
+    <section id="contextSection" class="context-grid">
+        <article class="card context-card">
+            <h2>Contexto</h2>
+            <p>
+                Una cuenta bancaria no siempre permite las mismas operaciones.
+                Su comportamiento depende de si está activa, bloqueada, sobregirada o cerrada.
+            </p>
         </article>
 
-        <article class="metric-card">
-            <span>Titular</span>
-            <strong id="accountOwner">-</strong>
+        <article class="card context-card">
+            <h2>Problema</h2>
+            <p>
+                Controlar muchas reglas con condicionales puede volver el sistema difícil de mantener.
+            </p>
         </article>
 
-        <article class="metric-card highlight">
-            <span>Saldo</span>
-            <strong id="balance">-</strong>
-        </article>
-
-        <article class="metric-card">
-            <span>Sobregiro</span>
-            <strong id="overdraft">-</strong>
-        </article>
-
-        <article class="metric-card">
-            <span>Destino</span>
-            <strong id="targetBalance">-</strong>
+        <article class="card context-card">
+            <h2>Solución</h2>
+            <p>
+                Separar el comportamiento de cada estado permite tener un sistema más claro,
+                flexible y fácil de ampliar.
+            </p>
         </article>
     </section>
 
-    <main class="main-grid">
-        <section class="card">
-            <div class="section-title">
-                <h2>Apertura de cuenta</h2>
-                <p>Ingrese los datos iniciales.</p>
+    <section id="simulationSection" class="simulation hidden">
+        <header class="hero compact">
+            <div>
+                <p class="badge">Panel operativo</p>
+                <h1>Gestión de Cuentas</h1>
+                <p>Administre operaciones bancarias de forma rápida y segura.</p>
             </div>
 
-            <label>
-                Titular
-                <input id="ownerName" type="text" maxlength="40" placeholder="Ej: David Cabrera">
-            </label>
+            <div class="state-panel">
+                <span>Estado</span>
+                <strong id="stateName">Sin cuenta</strong>
+                <small id="stateDescription">Cree una cuenta para iniciar.</small>
+            </div>
+        </header>
 
-            <label>
-                Saldo inicial
-                <input id="initialBalance" type="number" min="0" placeholder="Ej: 500000">
-            </label>
+        <section class="dashboard">
+            <article class="metric-card">
+                <span>Cuenta</span>
+                <strong id="accountNumber">-</strong>
+            </article>
 
-            <label>
-                Límite de sobregiro
-                <input id="overdraftLimit" type="number" min="0" placeholder="Ej: 200000">
-            </label>
+            <article class="metric-card">
+                <span>Titular</span>
+                <strong id="accountOwner">-</strong>
+            </article>
 
-            <button class="primary" onclick="createAccount()">Crear cuenta</button>
+            <article class="metric-card highlight">
+                <span>Saldo</span>
+                <strong id="balance">-</strong>
+            </article>
+
+            <article class="metric-card">
+                <span>Sobregiro</span>
+                <strong id="overdraft">-</strong>
+            </article>
+
+            <article class="metric-card">
+                <span>Destino</span>
+                <strong id="targetBalance">-</strong>
+            </article>
         </section>
 
-        <section class="card">
-            <div class="section-title">
-                <h2>Operaciones</h2>
-                <p>Seleccione una acción bancaria.</p>
-            </div>
+        <main class="main-grid">
+            <section class="card">
+                <div class="section-title">
+                    <h2>Apertura de cuenta</h2>
+                    <p>Ingrese los datos iniciales.</p>
+                </div>
 
-            <label>
-                Monto
-                <input id="amount" type="number" min="1" placeholder="Ej: 50000">
-            </label>
+                <label>
+                    Titular
+                    <input id="ownerName" type="text" maxlength="40" placeholder="Ej: David Cabrera">
+                </label>
 
-            <div class="actions">
-                <button id="depositButton" onclick="deposit()">Depositar</button>
-                <button id="withdrawButton" onclick="withdraw()">Retirar</button>
-                <button id="transferButton" onclick="transfer()">Transferir</button>
-                <button id="freezeButton" onclick="freeze()">Bloquear</button>
-                <button id="unfreezeButton" onclick="unfreeze()">Desbloquear</button>
-                <button id="closeButton" class="danger" onclick="closeAccount()">Cerrar cuenta</button>
-            </div>
-        </section>
-    </main>
+                <label>
+                    Saldo inicial
+                    <input id="initialBalance" type="number" min="0" placeholder="Ej: 500000">
+                </label>
 
-    <section class="bottom-grid">
-        <section class="card">
-            <div class="section-title">
-                <h2>Resultado</h2>
-                <p>Última operación realizada.</p>
-            </div>
+                <label>
+                    Límite de sobregiro
+                    <input id="overdraftLimit" type="number" min="0" placeholder="Ej: 200000">
+                </label>
 
-            <div id="messageBox" class="message-box">
-                Cree una cuenta para iniciar.
-            </div>
-        </section>
+                <button class="primary" onclick="createAccount()">Crear cuenta</button>
+            </section>
 
-        <section class="card">
-            <div class="section-title">
-                <h2>Movimientos</h2>
-                <p>Historial de actividad.</p>
-            </div>
+            <section class="card">
+                <div class="section-title">
+                    <h2>Operaciones</h2>
+                    <p>Seleccione una acción bancaria.</p>
+                </div>
 
-            <div id="history" class="history">
-                No hay movimientos para mostrar.
-            </div>
+                <label>
+                    Monto
+                    <input id="amount" type="number" min="1" placeholder="Ej: 50000">
+                </label>
+
+                <div class="actions">
+                    <button id="depositButton" onclick="deposit()">Depositar</button>
+                    <button id="withdrawButton" onclick="withdraw()">Retirar</button>
+                    <button id="transferButton" onclick="transfer()">Transferir</button>
+                    <button id="freezeButton" onclick="freeze()">Bloquear</button>
+                    <button id="unfreezeButton" onclick="unfreeze()">Desbloquear</button>
+                    <button id="closeButton" class="danger" onclick="closeAccount()">Cerrar cuenta</button>
+                </div>
+            </section>
+        </main>
+
+        <section class="bottom-grid">
+            <section class="card">
+                <div class="section-title">
+                    <h2>Resultado</h2>
+                    <p>Última operación realizada.</p>
+                </div>
+
+                <div id="messageBox" class="message-box">
+                    Cree una cuenta para iniciar.
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="section-title">
+                    <h2>Movimientos</h2>
+                    <p>Historial de actividad.</p>
+                </div>
+
+                <div id="history" class="history">
+                    No hay movimientos para mostrar.
+                </div>
+            </section>
         </section>
     </section>
 

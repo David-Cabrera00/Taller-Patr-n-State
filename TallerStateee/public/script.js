@@ -217,3 +217,15 @@ function showMessage(message, isError) {
     messageBox.textContent = message;
     messageBox.classList.toggle("error", isError);
 }
+function startSimulation() {
+    const simulationSection = document.getElementById("simulationSection");
+    simulationSection.classList.remove("hidden");
+    simulationSection.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function scrollToContext() {
+    document.getElementById("contextSection").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
