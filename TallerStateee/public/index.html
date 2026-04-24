@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Sistema Bancario - Patrón State</title>
+    <title>Sistema Bancario Digital</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -10,16 +10,15 @@
 
     <header class="hero">
         <div>
-            <p class="badge">Patrón de diseño State</p>
-            <h1>Sistema Bancario Inteligente</h1>
+            <p class="badge">Banco digital</p>
+            <h1>Gestión de Cuentas</h1>
             <p>
-                Simulación web local en Java donde una cuenta bancaria cambia su comportamiento
-                según su estado actual.
+                Administre operaciones bancarias de forma rápida y segura.
             </p>
         </div>
 
         <div class="state-panel">
-            <span>Estado actual</span>
+            <span>Estado</span>
             <strong id="stateName">Sin cuenta</strong>
             <small id="stateDescription">Cree una cuenta para iniciar.</small>
         </div>
@@ -27,7 +26,7 @@
 
     <section class="dashboard">
         <article class="metric-card">
-            <span>Número de cuenta</span>
+            <span>Cuenta</span>
             <strong id="accountNumber">-</strong>
         </article>
 
@@ -37,17 +36,17 @@
         </article>
 
         <article class="metric-card highlight">
-            <span>Saldo actual</span>
+            <span>Saldo</span>
             <strong id="balance">-</strong>
         </article>
 
         <article class="metric-card">
-            <span>Límite de sobregiro</span>
+            <span>Sobregiro</span>
             <strong id="overdraft">-</strong>
         </article>
 
         <article class="metric-card">
-            <span>Saldo cuenta destino</span>
+            <span>Destino</span>
             <strong id="targetBalance">-</strong>
         </article>
     </section>
@@ -55,8 +54,8 @@
     <main class="main-grid">
         <section class="card">
             <div class="section-title">
-                <h2>Crear cuenta</h2>
-                <p>Registre una cuenta para probar las transiciones del patrón State.</p>
+                <h2>Apertura de cuenta</h2>
+                <p>Ingrese los datos iniciales.</p>
             </div>
 
             <label>
@@ -79,8 +78,8 @@
 
         <section class="card">
             <div class="section-title">
-                <h2>Operaciones bancarias</h2>
-                <p>Cada acción se comporta diferente según el estado de la cuenta.</p>
+                <h2>Operaciones</h2>
+                <p>Seleccione una acción bancaria.</p>
             </div>
 
             <label>
@@ -97,78 +96,28 @@
                 <button id="closeButton" class="danger" onclick="closeAccount()">Cerrar cuenta</button>
             </div>
         </section>
-
-        <section class="card">
-            <div class="section-title">
-                <h2>Reglas por estado</h2>
-                <p>Así se evidencia el comportamiento polimórfico del patrón State.</p>
-            </div>
-
-            <div class="rules">
-                <div class="rule">
-                    <strong>Activa</strong>
-                    <span>Deposita, retira, transfiere, bloquea y puede cerrar si saldo es cero.</span>
-                </div>
-
-                <div class="rule">
-                    <strong>Sobregirada</strong>
-                    <span>Solo permite depositar para pagar el sobregiro.</span>
-                </div>
-
-                <div class="rule">
-                    <strong>Bloqueada</strong>
-                    <span>Permite depósitos y desbloqueo. No permite retiros ni transferencias.</span>
-                </div>
-
-                <div class="rule">
-                    <strong>Cerrada</strong>
-                    <span>No permite ninguna operación bancaria.</span>
-                </div>
-            </div>
-        </section>
     </main>
-
-    <section class="state-flow card">
-        <div class="section-title">
-            <h2>Transiciones del patrón State</h2>
-            <p>El objeto cuenta cambia de comportamiento sin usar condicionales complejas.</p>
-        </div>
-
-        <div class="flow">
-            <span>Activa</span>
-            <b>→</b>
-            <span>Sobregirada</span>
-            <b>→</b>
-            <span>Activa</span>
-            <b>|</b>
-            <span>Bloqueada</span>
-            <b>→</b>
-            <span>Activa / Sobregirada</span>
-            <b>|</b>
-            <span>Cerrada</span>
-        </div>
-    </section>
 
     <section class="bottom-grid">
         <section class="card">
             <div class="section-title">
-                <h2>Mensaje del sistema</h2>
-                <p>Resultado de la última operación realizada.</p>
+                <h2>Resultado</h2>
+                <p>Última operación realizada.</p>
             </div>
 
             <div id="messageBox" class="message-box">
-                Cree una cuenta para iniciar el taller.
+                Cree una cuenta para iniciar.
             </div>
         </section>
 
         <section class="card">
             <div class="section-title">
-                <h2>Historial de transacciones</h2>
-                <p>Registro de operaciones, rechazos y cambios de estado.</p>
+                <h2>Movimientos</h2>
+                <p>Historial de actividad.</p>
             </div>
 
             <div id="history" class="history">
-                No hay transacciones para mostrar.
+                No hay movimientos para mostrar.
             </div>
         </section>
     </section>
