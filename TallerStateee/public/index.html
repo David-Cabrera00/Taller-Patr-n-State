@@ -6,129 +6,173 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="page">
+<div class="app">
+
     <header class="hero">
         <div>
-            <p class="eyebrow">Taller de patrones de diseño</p>
-            <h1>Sistema Bancario con Patrón State</h1>
-            <p class="hero-text">
-                Una cuenta bancaria cambia su comportamiento dependiendo de su estado actual:
-                activa, sobregirada, bloqueada o cerrada.
+            <p class="badge">Patrón de diseño State</p>
+            <h1>Sistema Bancario Inteligente</h1>
+            <p>
+                Simulación web local en Java donde una cuenta bancaria cambia su comportamiento
+                según su estado actual.
             </p>
         </div>
 
-        <div class="hero-card">
+        <div class="state-panel">
             <span>Estado actual</span>
             <strong id="stateName">Sin cuenta</strong>
+            <small id="stateDescription">Cree una cuenta para iniciar.</small>
         </div>
     </header>
 
-    <main class="layout">
+    <section class="dashboard">
+        <article class="metric-card">
+            <span>Número de cuenta</span>
+            <strong id="accountNumber">-</strong>
+        </article>
+
+        <article class="metric-card">
+            <span>Titular</span>
+            <strong id="accountOwner">-</strong>
+        </article>
+
+        <article class="metric-card highlight">
+            <span>Saldo actual</span>
+            <strong id="balance">-</strong>
+        </article>
+
+        <article class="metric-card">
+            <span>Límite de sobregiro</span>
+            <strong id="overdraft">-</strong>
+        </article>
+
+        <article class="metric-card">
+            <span>Saldo cuenta destino</span>
+            <strong id="targetBalance">-</strong>
+        </article>
+    </section>
+
+    <main class="main-grid">
         <section class="card">
-            <div class="card-header">
+            <div class="section-title">
                 <h2>Crear cuenta</h2>
-                <p>Registra una cuenta para empezar a probar las operaciones.</p>
+                <p>Registre una cuenta para probar las transiciones del patrón State.</p>
             </div>
 
-            <div class="form-grid">
-                <label>
-                    Titular
-                    <input id="ownerName" type="text" placeholder="Ej: David Cabrera" maxlength="40">
-                </label>
+            <label>
+                Titular
+                <input id="ownerName" type="text" maxlength="40" placeholder="Ej: David Cabrera">
+            </label>
 
-                <label>
-                    Saldo inicial
-                    <input id="initialBalance" type="number" placeholder="Ej: 500000" min="0">
-                </label>
+            <label>
+                Saldo inicial
+                <input id="initialBalance" type="number" min="0" placeholder="Ej: 500000">
+            </label>
 
-                <label>
-                    Límite de sobregiro
-                    <input id="overdraftLimit" type="number" placeholder="Ej: 200000" min="0">
-                </label>
+            <label>
+                Límite de sobregiro
+                <input id="overdraftLimit" type="number" min="0" placeholder="Ej: 200000">
+            </label>
 
-                <button class="primary-button" onclick="createAccount()">Crear cuenta</button>
-            </div>
-        </section>
-
-        <section class="card account-card">
-            <div class="card-header">
-                <h2>Información de la cuenta</h2>
-                <p>Datos actualizados después de cada operación.</p>
-            </div>
-
-            <div class="info-grid">
-                <div>
-                    <span>Número</span>
-                    <strong id="accountNumber">-</strong>
-                </div>
-
-                <div>
-                    <span>Titular</span>
-                    <strong id="accountOwner">-</strong>
-                </div>
-
-                <div>
-                    <span>Saldo</span>
-                    <strong id="balance">-</strong>
-                </div>
-
-                <div>
-                    <span>Sobregiro</span>
-                    <strong id="overdraft">-</strong>
-                </div>
-
-                <div>
-                    <span>Cuenta destino</span>
-                    <strong id="targetBalance">-</strong>
-                </div>
-            </div>
+            <button class="primary" onclick="createAccount()">Crear cuenta</button>
         </section>
 
         <section class="card">
-            <div class="card-header">
-                <h2>Operaciones</h2>
-                <p>Las reglas cambian según el estado de la cuenta.</p>
+            <div class="section-title">
+                <h2>Operaciones bancarias</h2>
+                <p>Cada acción se comporta diferente según el estado de la cuenta.</p>
             </div>
 
             <label>
                 Monto
-                <input id="amount" type="number" placeholder="Ej: 50000" min="1">
+                <input id="amount" type="number" min="1" placeholder="Ej: 50000">
             </label>
 
-            <div class="button-grid">
-                <button onclick="deposit()">Depositar</button>
-                <button onclick="withdraw()">Retirar</button>
-                <button onclick="transfer()">Transferir</button>
-                <button onclick="freeze()">Bloquear</button>
-                <button onclick="unfreeze()">Desbloquear</button>
-                <button class="danger-button" onclick="closeAccount()">Cerrar cuenta</button>
+            <div class="actions">
+                <button id="depositButton" onclick="deposit()">Depositar</button>
+                <button id="withdrawButton" onclick="withdraw()">Retirar</button>
+                <button id="transferButton" onclick="transfer()">Transferir</button>
+                <button id="freezeButton" onclick="freeze()">Bloquear</button>
+                <button id="unfreezeButton" onclick="unfreeze()">Desbloquear</button>
+                <button id="closeButton" class="danger" onclick="closeAccount()">Cerrar cuenta</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="section-title">
+                <h2>Reglas por estado</h2>
+                <p>Así se evidencia el comportamiento polimórfico del patrón State.</p>
+            </div>
+
+            <div class="rules">
+                <div class="rule">
+                    <strong>Activa</strong>
+                    <span>Deposita, retira, transfiere, bloquea y puede cerrar si saldo es cero.</span>
+                </div>
+
+                <div class="rule">
+                    <strong>Sobregirada</strong>
+                    <span>Solo permite depositar para pagar el sobregiro.</span>
+                </div>
+
+                <div class="rule">
+                    <strong>Bloqueada</strong>
+                    <span>Permite depósitos y desbloqueo. No permite retiros ni transferencias.</span>
+                </div>
+
+                <div class="rule">
+                    <strong>Cerrada</strong>
+                    <span>No permite ninguna operación bancaria.</span>
+                </div>
             </div>
         </section>
     </main>
 
-    <section class="bottom-layout">
-        <div class="card">
-            <div class="card-header">
+    <section class="state-flow card">
+        <div class="section-title">
+            <h2>Transiciones del patrón State</h2>
+            <p>El objeto cuenta cambia de comportamiento sin usar condicionales complejas.</p>
+        </div>
+
+        <div class="flow">
+            <span>Activa</span>
+            <b>→</b>
+            <span>Sobregirada</span>
+            <b>→</b>
+            <span>Activa</span>
+            <b>|</b>
+            <span>Bloqueada</span>
+            <b>→</b>
+            <span>Activa / Sobregirada</span>
+            <b>|</b>
+            <span>Cerrada</span>
+        </div>
+    </section>
+
+    <section class="bottom-grid">
+        <section class="card">
+            <div class="section-title">
                 <h2>Mensaje del sistema</h2>
-                <p>Resultado de la última operación.</p>
+                <p>Resultado de la última operación realizada.</p>
             </div>
 
             <div id="messageBox" class="message-box">
                 Cree una cuenta para iniciar el taller.
             </div>
-        </div>
+        </section>
 
-        <div class="card">
-            <div class="card-header">
+        <section class="card">
+            <div class="section-title">
                 <h2>Historial de transacciones</h2>
-                <p>Registro completo de las acciones realizadas.</p>
+                <p>Registro de operaciones, rechazos y cambios de estado.</p>
             </div>
 
             <div id="history" class="history">
                 No hay transacciones para mostrar.
             </div>
-        </div>
+        </section>
     </section>
+
 </div>
 
 <script src="script.js"></script>
