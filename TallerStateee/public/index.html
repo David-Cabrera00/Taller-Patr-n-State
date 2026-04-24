@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema Bancario - Patrón State</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+    <header class="hero">
+        <div>
+            <p class="eyebrow">Taller de patrones de diseño</p>
+            <h1>Sistema Bancario con Patrón State</h1>
+            <p class="hero-text">
+                Una cuenta bancaria cambia su comportamiento dependiendo de su estado actual:
+                activa, sobregirada, bloqueada o cerrada.
+            </p>
+        </div>
+
+        <div class="hero-card">
+            <span>Estado actual</span>
+            <strong id="stateName">Sin cuenta</strong>
+        </div>
+    </header>
+
+    <main class="layout">
+        <section class="card">
+            <div class="card-header">
+                <h2>Crear cuenta</h2>
+                <p>Registra una cuenta para empezar a probar las operaciones.</p>
+            </div>
+
+            <div class="form-grid">
+                <label>
+                    Titular
+                    <input id="ownerName" type="text" placeholder="Ej: David Cabrera" maxlength="40">
+                </label>
+
+                <label>
+                    Saldo inicial
+                    <input id="initialBalance" type="number" placeholder="Ej: 500000" min="0">
+                </label>
+
+                <label>
+                    Límite de sobregiro
+                    <input id="overdraftLimit" type="number" placeholder="Ej: 200000" min="0">
+                </label>
+
+                <button class="primary-button" onclick="createAccount()">Crear cuenta</button>
+            </div>
+        </section>
+
+        <section class="card account-card">
+            <div class="card-header">
+                <h2>Información de la cuenta</h2>
+                <p>Datos actualizados después de cada operación.</p>
+            </div>
+
+            <div class="info-grid">
+                <div>
+                    <span>Número</span>
+                    <strong id="accountNumber">-</strong>
+                </div>
+
+                <div>
+                    <span>Titular</span>
+                    <strong id="accountOwner">-</strong>
+                </div>
+
+                <div>
+                    <span>Saldo</span>
+                    <strong id="balance">-</strong>
+                </div>
+
+                <div>
+                    <span>Sobregiro</span>
+                    <strong id="overdraft">-</strong>
+                </div>
+
+                <div>
+                    <span>Cuenta destino</span>
+                    <strong id="targetBalance">-</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-header">
+                <h2>Operaciones</h2>
+                <p>Las reglas cambian según el estado de la cuenta.</p>
+            </div>
+
+            <label>
+                Monto
+                <input id="amount" type="number" placeholder="Ej: 50000" min="1">
+            </label>
+
+            <div class="button-grid">
+                <button onclick="deposit()">Depositar</button>
+                <button onclick="withdraw()">Retirar</button>
+                <button onclick="transfer()">Transferir</button>
+                <button onclick="freeze()">Bloquear</button>
+                <button onclick="unfreeze()">Desbloquear</button>
+                <button class="danger-button" onclick="closeAccount()">Cerrar cuenta</button>
+            </div>
+        </section>
+    </main>
+
+    <section class="bottom-layout">
+        <div class="card">
+            <div class="card-header">
+                <h2>Mensaje del sistema</h2>
+                <p>Resultado de la última operación.</p>
+            </div>
+
+            <div id="messageBox" class="message-box">
+                Cree una cuenta para iniciar el taller.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Historial de transacciones</h2>
+                <p>Registro completo de las acciones realizadas.</p>
+            </div>
+
+            <div id="history" class="history">
+                No hay transacciones para mostrar.
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
