@@ -228,4 +228,40 @@ function scrollToContext() {
         behavior: "smooth",
         block: "start"
     });
+
+    function updateStatePanelColor(stateName) {
+        const statePanel = document.getElementById("statePanel");
+
+        if (!statePanel) {
+            return;
+        }
+
+        statePanel.classList.remove(
+            "active-state",
+            "overdrawn-state",
+            "frozen-state",
+            "closed-state"
+        );
+
+        switch (stateName) {
+            case "Activa":
+                statePanel.classList.add("active-state");
+                break;
+
+            case "Sobregirada":
+                statePanel.classList.add("overdrawn-state");
+                break;
+
+            case "Bloqueada":
+                statePanel.classList.add("frozen-state");
+                break;
+
+            case "Cerrada":
+                statePanel.classList.add("closed-state");
+                break;
+
+            default:
+                break;
+        }
+    }
 }

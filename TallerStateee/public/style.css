@@ -576,4 +576,21 @@ input:focus {
     .state-arrow {
         font-size: 20px;
     }
+
+
+    .state-panel.active-state {
+        background: linear-gradient(135deg, #2563eb, #16a34a);
+    }
+
+    .state-panel.overdrawn-state {
+        background: linear-gradient(135deg, #f59e0b, #b45309);
+    }
+
+    .state-panel.frozen-state {
+        background: linear-gradient(135deg, #7c3aed, #4338ca);
+    }
+
+    .state-panel.closed-state {
+        background: linear-gradient(135deg, #dc2626, #7f1d1d);
+    }
 }
